@@ -30,20 +30,25 @@ $person = $_POST['person'];
 </head>
 <body>
 
-	<h1><?=Interview::$title;?></h1>
+	<h1><?=Interview::$title;?></h1> <!-- Changed this for testing purposes -->
 
 	<?php
 	// Print 10 times
-	for ($i=10; $i<0; $i++) {
-		echo '<p>'+$lipsum+'</p>';
+	for ($i=10; $i>0; $i--) {
+		//Changed "<" sign to ">" sign
+		//Changed $i++ to $i-- so the for statement could run
+		//Changed + to . for proper concatenation
+		echo '<p>'. $lipsum . '</p>';
 	}
 	?>
 
 
 	<hr>
 
-
-	<form method="get" action="<?=$_SERVER['REQUEST_URI'];?>">
+	<!-- Changed form method to "post" instead of "get" as we are using it above -->
+	<!-- This will throw an error until the form is filled in -->
+	<!-- Action could be left blank since it is being tested locally -->
+	<form method="post" action="<?=$_SERVER['REQUEST_URI'];?>">
 		<p><label for="firstName">First name</label> <input type="text" name="person[first_name]" id="firstName"></p>
 		<p><label for="lastName">Last name</label> <input type="text" name="person[last_name]" id="lastName"></p>
 		<p><label for="email">Email</label> <input type="text" name="person[email]" id="email"></p>
@@ -67,11 +72,13 @@ $person = $_POST['person'];
 			</tr>
 		</thead>
 		<tbody>
-			<?php foreach ($people as $person): ?>
+			<?php foreach ($people as $person) : ?>
 				<tr>
-					<td><?=$person->first_name;?></td>
-					<td><?=$person->last_name;?></td>
-					<td><?=$person->email;?></td>
+					<!-- Removed "->" and added brackets for the following 3 lines -->
+					<!-- Lines were changed for testing -->
+					<td><?=$person['first_name'];?></td> 
+					<td><?=$person['last_name'];?></td>
+					<td><?=$person['email'];?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
